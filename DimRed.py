@@ -4,8 +4,7 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import umap.umap_ as umap
-from cin.dataset import lambeq_data_loader, amazon_data_loader
-
+from data import lambeq_data_loader, amazon_data_loader
 # Import the necessary functions from your classifier file
 from QC_new import main as classifier_main, amp_hqc, dc_hqc
 
