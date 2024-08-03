@@ -4,9 +4,9 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import umap.umap_ as umap
-from data import lambeq_data_loader, amazon_data_loader
+from Data import lambeq_data_loader, amazon_data_loader
 # Import the necessary functions from your classifier file
-from QC_new import main as classifier_main, amp_hqc, dc_hqc
+from quantum_classifier import main as qc_main
 
 
 
@@ -97,7 +97,7 @@ for dataset in dataset_list:
                     
                     # Apply classification to reduced data
                     print(f"\n Classifying Dataset: {dataset} Vectorizer:{vectorizer} Reduction: {reduction} Quantum Encoding: {encoding}")
-                    classifier_results = classifier_main(X=reduced_data, Y=Y, encoding=encoding, reps=reps, steps=steps)
+                    classifier_results = qc_main(X=reduced_data, Y=Y, encoding=encoding, reps=reps, steps=steps)
                     
                     # Store results
                     results.append({
@@ -125,59 +125,4 @@ results_df = pd.DataFrame(results)
 # Save or display the results
 results_df.to_csv('classification_results.csv')
 print(results_df.head())
-
-
-# results = []
-
-# # Iterate through all combinations
-# for dataset_name, (X, Y) in datasets.items():
-#     for red_name, red_method in reductions.items():
-#         try:
-#             print(f"\nProcessing {dataset_name} with {red_name}")
-#             # Reduce dimensions
-#             reduced_data, n_components = reduce_dimensions(X, Y, red_method, red_name)
-            
-#             # Apply classification to reduced data
-#             print(f"Applying classification to reduced data")
-#             classifier_results = classifier_main(encoding=amp_hqc,X=reduced_data, Y=Y)
-            
-#             # Store results
-#             results.append({
-#                 'dataset': dataset_name,
-#                 'reduction': red_name,
-#                 'reduced_data': reduced_data,
-#                 'dimensions': reduced_data.shape,
-#                 'classification_results': classifier_results
-#             })
-#         except Exception as e:
-#             print(f"Error processing {dataset_name} with {red_name}: {str(e)}")
-
-# # Adding LDA separately due to its unique requirements
-# for dataset_name, (X, Y) in datasets.items():
-#     try:
-#         print(f"\nProcessing {dataset_name} with LDA")
-#         # Reduce dimensions using LDA
-#         reduced_data, n_components = reduce_dimensions(X, Y, LDA(), 'LDA')
-        
-#         # Apply classification to reduced data
-#         print(f"Applying classification to LDA-reduced data")
-#         classifier_results = classifier_main(encoding=amp_hqc, X=reduced_data, Y=Y)
-        
-#         # Store results
-#         results.append({
-#             'dataset': dataset_name,
-#             'reduction': 'LDA',
-#             'reduced_data': reduced_data,
-#             'dimensions': reduced_data.shape,
-#             'classification_results': classifier_results
-#         })
-#     except Exception as e:
-#         print(f"Error processing {dataset_name} with LDA: {str(e)}")
-
-# # Convert results to DataFrame for better visualization
-# results_df = pd.DataFrame(results)
-
-# # Save or display the results
-# results_df.to_csv('Test5.csv')
-# print(results_df.head())
 
