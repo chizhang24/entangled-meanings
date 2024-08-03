@@ -1,5 +1,6 @@
 import spacy
 import numpy as np
+import os
 import nltk
 from nltk.tokenize import word_tokenize
 
@@ -7,8 +8,8 @@ from nltk.tokenize import word_tokenize
 nlp = spacy.load("en_core_web_md")
 nltk.download('punkt')
 
-# Change the path to the provided Amazon data
-amazon_data_path = "/Users/charles/Documents/dcsp/QClassifier/cin/dataset/small_amazon_reviews.txt"
+# Get the relative path of the Amazon dataset
+amazon_data_path = os.path.join(os.path.dirname(__file__), "small_amazon_reviews.txt")
 
 def read_data(filename):
     labels, sentences = [], []

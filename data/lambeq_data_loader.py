@@ -1,5 +1,6 @@
 import spacy
 import numpy as np
+import os
 import nltk
 from nltk.tokenize import word_tokenize
 from gensim.models import Word2Vec
@@ -7,8 +8,8 @@ from gensim.models import Word2Vec
 nlp = spacy.load("en_core_web_md")
 nltk.download('punkt')
 
-# Change the path on your local machine
-lambeq_path = "/Users/charles/Documents/dcsp/QClassifier/cin/dataset/lambeq.txt"
+# Get the relative path of the lambeq dataset
+lambeq_path = os.path.join(os.path.dirname(__file__), "lambeq.txt")
 
 def read_data(filename):
   labels, sentences = [], []
