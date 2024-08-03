@@ -166,7 +166,7 @@ cython_debug/
 
 # Test files
 test_*.py
-test*.ipynb 
+test.ipynb 
 
 # Visual Studio Code settings
 .vscode/
